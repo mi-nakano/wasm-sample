@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>WebAssembly Simple Sample</title>
+  </head>
+  <body>
+    <script>
+      fetch("target/wasm32-unknown-unknown/debug/wasm-sample.wasm").then(function(response) {
+        return response.arrayBuffer();
+      }).then(function(bytes) {
+        return WebAssembly.compile(bytes);
+      }).then(function(module) {
+        return WebAssembly.instantiate(module);
+      }).then(function(instance) {
+        console.log(instance.exports.add(1, 2));
+      });
+    </script>
+  </body>
+</html>
+
+
